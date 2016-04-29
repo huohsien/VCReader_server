@@ -15,6 +15,8 @@
         $response["email"] = $rs["email"];
         $response["token"] = $rs["token"];
         $response["timestamp"] = $rs["timestamp"];
+        $response["user_id"] = $rs["id"];
+        $response["signup_type"] = $rs["signup_type"];
     }
     echo json_encode($response,true);
 ?>

@@ -27,17 +27,17 @@ function chk_login()
 	if(!$num_r)
 	{
 		header("Location: index.php");
-	} 
+	}
 }
 function chk_admin()
 {
-session_start();
-$username = $_SESSION["SETTING"]["username"];
-if (! $username)
-{
-                header("Location: login.php");
+	session_start();
+	$username = $_SESSION["SETTING"]["username"];
+	if (! $username)
+	{
+		header("Location: login.php");
 
-}
+	}
 }
 function admin_chk($uid,$upwd)
 {
@@ -48,7 +48,7 @@ function admin_chk($uid,$upwd)
 		$mb_chk_q="select * from admin where id='".$uid."' and pwd='".$upwd."' and status='Y' ";
 		$mb_chk_r=db_q($mb_chk_q);
 		$num_chk=r_size($mb_chk_r);
-		$row_chk=get_data($mb_chk_r);   
+		$row_chk=get_data($mb_chk_r);
 		if($num_chk)
 		{
 			$_SESSION['SETTING']['id']=$row_chk['id'];
@@ -75,68 +75,63 @@ function admin_chk($uid,$upwd)
 }
 function member_chk($uid,$upwd,$mac_address)
 {
-        $upwd=str_replace(" ","",$upwd);
-        $uid=str_replace(" ","",$uid);
-        if($upwd and $uid)
-        {
-                $mb_chk_q="select * from member where id='".$uid."' and pwd=md5('".$upwd."') and status='1' ";
-                //$mb_chk_q="select * from member where id='".$uid."' and pwd='".$upwd."' and status='1' ";
-                $mb_chk_r=db_q($mb_chk_q);
-                $num_chk=r_size($mb_chk_r);
-                $row_chk=get_data($mb_chk_r);
-                if($num_chk)
-                {
-                        $_SESSION['user']['id']=$row_chk['id'];
-                        $_SESSION['user']['pwd']=$row_chk['pwd'];
-                        $_SESSION['user']['oid']=$row_chk['oid'];
-$m_id=$row_chk['oid'];
-$sql1="select oid from member_mac where m_id='$m_id' and mac_address='$mac_address'";
+	$upwd=str_replace(" ","",$upwd);
+	$uid=str_replace(" ","",$uid);
+	if($upwd and $uid) {
+		$mb_chk_q = "select * from member where id='" . $uid . "' and pwd=md5('" . $upwd . "') and status='1' ";
+		//$mb_chk_q="select * from member where id='".$uid."' and pwd='".$upwd."' and status='1' ";
+		$mb_chk_r = db_q($mb_chk_q);
+		$num_chk = r_size($mb_chk_r);
+		$row_chk = get_data($mb_chk_r);
+		if ($num_chk) {
+			$_SESSION['user']['id'] = $row_chk['id'];
+			$_SESSION['user']['pwd'] = $row_chk['pwd'];
+			$_SESSION['user']['oid'] = $row_chk['oid'];
+			$m_id = $row_chk['oid'];
+			$sql1 = "select oid from member_mac where m_id='$m_id' and mac_address='$mac_address'";
 
-$list_r=db_q($sql1);
-$num_r1=r_size($list_r);
-        if(!$num_r1){
-                $s_ind="insert into member_mac (oid,m_id,mac_address,mtime) values('','$m_id','$mac_address',now())";
-                db_q($s_ind);
-        }
-
-
-	header('Location: /view.php?mac_address='.$mac_address);
-                }
-                else
-                {
-                        return '0';
-                }
-        }
+			$list_r = db_q($sql1);
+			$num_r1 = r_size($list_r);
+			if (!$num_r1) {
+				$s_ind = "insert into member_mac (oid,m_id,mac_address,mtime) values('','$m_id','$mac_address',now())";
+				db_q($s_ind);
+			}
+			header('Location: /view.php?mac_address=' . $mac_address);
+		} else
+		{
+			return '0';
+		}
+	}
 }
 function member_chk1($uid,$upwd,$url)
 {
-        $upwd=str_replace(" ","",$upwd);
-        $uid=str_replace(" ","",$uid);
-        if($upwd and $uid)
-        {
+	$upwd=str_replace(" ","",$upwd);
+	$uid=str_replace(" ","",$uid);
+	if($upwd and $uid)
+	{
 //                $mb_chk_q="select * from member where id='".$uid."' and pwd=md5('".$upwd."') and status='1' and pwd!='@@@@' ";
-                $mb_chk_q="select * from member where id='".$uid."' and pwd=md5('".$upwd."') and pwd!='@@@@' ";
-                $mb_chk_r=db_q($mb_chk_q);
-                $num_chk=r_size($mb_chk_r);
-                $row_chk=get_data($mb_chk_r);
-                if($num_chk)
-                {
-		if(!$url)$url="news.php";
+		$mb_chk_q="select * from member where id='".$uid."' and pwd=md5('".$upwd."') and pwd!='@@@@' ";
+		$mb_chk_r=db_q($mb_chk_q);
+		$num_chk=r_size($mb_chk_r);
+		$row_chk=get_data($mb_chk_r);
+		if($num_chk)
+		{
+			if(!$url)$url="news.php";
 			if($row_chk['status']==1){
-                        $_SESSION['user']['id']=$row_chk['id'];
-                        $_SESSION['user']['pwd']=$row_chk['pwd'];
-                        $_SESSION['user']['oid']=$row_chk['oid'];
-                        $_SESSION['user']['name']=$row_chk["first_name"];
-                        header("Location:".$url);
+				$_SESSION['user']['id']=$row_chk['id'];
+				$_SESSION['user']['pwd']=$row_chk['pwd'];
+				$_SESSION['user']['oid']=$row_chk['oid'];
+				$_SESSION['user']['name']=$row_chk["first_name"];
+				header("Location:".$url);
 			}else return '5';
-			
-                }
-                else
-                {
+
+		}
+		else
+		{
 			return '0';
 
-                }
-        }
+		}
+	}
 }
 
 
@@ -249,11 +244,11 @@ function chk_power($power)
 	$apower=$_SESSION[admin][power];
 	if($apower!=$power)
 	{
-	  $chk_power=strpos($power,$apower);
-	  if(is_bool($chk_power) and !$chk_power)
-		$chk_power=0; 
-	  else 
-		$chk_power=1;
+		$chk_power=strpos($power,$apower);
+		if(is_bool($chk_power) and !$chk_power)
+			$chk_power=0;
+		else
+			$chk_power=1;
 	}
 	else
 		$chk_power=$power;
@@ -266,11 +261,11 @@ function chk_power($power)
 }
 function instr($str,$chk_str)
 {
-  $chk_status=strpos($str,$chk_str);
-  if($chk_status===false)
-  	return 0;
-  else
-	  return $chk_status;
+	$chk_status=strpos($str,$chk_str);
+	if($chk_status===false)
+		return 0;
+	else
+		return $chk_status;
 }
 function repeat_str($str,$x,$first,$end)
 {
@@ -287,31 +282,31 @@ for(reset($_REQUEST);$k2=key($_REQUEST);next($_REQUEST))
 @defined("APP_ID","168019063394729");
 @defined("APP_SEC","eabda76112659ef2c50c68b13c17deb5");
 function age($Time) {
-$n1=date("Y-m-d",$Time/1000);
-$d_array=explode("-",$n1);
+	$n1=date("Y-m-d",$Time/1000);
+	$d_array=explode("-",$n1);
 //$UTime = $Time;
 //   $age = date('Y') - date('Y',$UTime);
-   $age = date('Y') - $d_array[0];
+	$age = date('Y') - $d_array[0];
 //     if(date('m') - date('m',$UTime) < 0){ // 月相減為 負值 沒超過生日
-     if(date('m') - $d_array[1] < 0){ // 月相減為 負值 沒超過生日
-       $age = $age - 1;
+	if(date('m') - $d_array[1] < 0){ // 月相減為 負值 沒超過生日
+		$age = $age - 1;
 //       $age_m=12-date('m',$UTime)+date('m');
-       $age_m=12-$d_array[1]+date('m');
+		$age_m=12-$d_array[1]+date('m');
 //     } else if(date('m') == date('m',$UTime) && date('d') - date('d',$UTime) < 0){ // 同月並且日相減為 負值 沒超過生日
-     } else if(date('m') == $d_array[1] && date('d') - $d_array[2] < 0){ // 同月並且日相減為 負值 沒超過生日
-       $age = $age - 1;
-       $age_m=11;
-     }else
-        $age_m=date('m') - $d_array[1];
+	} else if(date('m') == $d_array[1] && date('d') - $d_array[2] < 0){ // 同月並且日相減為 負值 沒超過生日
+		$age = $age - 1;
+		$age_m=11;
+	}else
+		$age_m=date('m') - $d_array[1];
 //        $age_m=date('m') - date('m',$UTime);
-     if($age < 0){ // 判斷年齡為負值,表示為今年出生為零歲,修正負值為0
-       $age = 0;
-     }
-$r_age["Y"]=$age;
-$r_age["M"]=$age_m;
-return $r_age;
+	if($age < 0){ // 判斷年齡為負值,表示為今年出生為零歲,修正負值為0
+		$age = 0;
+	}
+	$r_age["Y"]=$age;
+	$r_age["M"]=$age_m;
+	return $r_age;
 //   return $age;
- }
+}
 //$Mid_value="請提供";
 $Mid_value="2789";
 
