@@ -18,6 +18,7 @@ if (empty($account_name) || empty($account_password)) {
         $response["error"]["code"] = '102';
         $response["error"]["message"] = "Incorrect account name or password";
     } else {
+        $response["account_name"] = $rs["account_name"];
         $response["nick_name"] = $rs["nick_name"];
         $response["email"] = $rs["email"];
         $response["token"] = $rs["token"];
