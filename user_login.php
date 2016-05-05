@@ -20,7 +20,7 @@ if (empty($account_name) || empty($account_password)) {
     } else {
         $response["account_name"] = $rs["account_name"];
         $response["nick_name"] = $rs["nick_name"];
-        $response["email"] = $rs["email"];
+        $response["phone_number"] = $rs["phone_number"];
         $response["token"] = $rs["token"];
         $response["timestamp"] = $rs["timestamp"];
         $response["user_id"] = $rs["id"];

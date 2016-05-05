@@ -7,13 +7,13 @@ include_once("db.php");
 $account_name = $_REQUEST["account_name"];
 $account_password = $_REQUEST["account_password"];
 $nic_kname = $_REQUEST["nick_name"];
-$email = $_REQUEST["email"];
+$phone_number = $_REQUEST["phone_number"];
 $token = $_REQUEST["token"];
 $timestamp = $_REQUEST["timestamp"];
 $signup_type = $_REQUEST["signup_type"];
 
 // check availability for account name (openID for QQ. here openID is stored as token) and email
-$sql = "select * from User where account_name = '$account_name' or (token = '$token' and signup_type = 'QQ') or email = '$email'";
+$sql = "select * from User where account_name = '$account_name' or (token = '$token' and signup_type = 'QQ') or phone_number = '$phone_number'";
 $list_r = db_q($sql);
 $rs = get_data($list_r);
 
@@ -35,7 +35,7 @@ if(empty($rs)) {
         $status["token"] = $token;
     }
 
-    $sql = "insert into User (account_name,account_password,nick_name,email,token,timestamp,signup_type) values ('$account_name','$account_password','$nick_name','$email','$token','$timestamp','$signup_type')";
+    $sql = "insert into User (account_name,account_password,nick_name,phone_number,token,timestamp,signup_type) values ('$account_name','$account_password','$nick_name','$phone_number','$token','$timestamp','$signup_type')";
     $list_r = db_q($sql);
     $user_id = mysql_insert_id();
     $status["user_id"] = $user_id;
@@ -59,7 +59,7 @@ if(empty($rs)) {
 
 $status["account_name"] = $account_name;
 $status["nick_name"] = $nic_kname;
-$status["email"] = $email;
+$status["phone_number"] = $phone_number;
 $status["token"] = $token;
 $status["timestamp"] = $timestamp;
 $status["signup_type"] = $signup_type;
