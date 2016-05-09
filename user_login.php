@@ -11,7 +11,7 @@ if (empty($account_name) || empty($account_password)) {
         echo json_encode($response,true);
         exit();
     }
-    $sql = "select * from User where account_name = '$account_name' and account_password  = '$account_password'";
+    $sql = "select * from User where account_name = '$account_name' and account_password  = '$account_password' and verified = 1";
     $list_r = db_q($sql);
     $rs = get_data($list_r);
     if (empty($rs)) {
@@ -24,7 +24,7 @@ if (empty($account_name) || empty($account_password)) {
         $response["token"] = $rs["token"];
         $response["timestamp"] = $rs["timestamp"];
         $response["user_id"] = $rs["id"];
-        $response["signup_type"] = $rs["signup_type"];
+        $response["signup_type"] = 'direct'; //$rs["signup_type"];
     }
     echo json_encode($response,true);
 ?>

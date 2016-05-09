@@ -5,5 +5,7 @@ error code:
 103 : account or email already exists
 104 : openID(token) of the current QQ account is missing in the VCReader's server
 105 : User not found
+106 : account needs phone verification
+107 : phone number not found for verification
 
 200 : Parameters are missing
