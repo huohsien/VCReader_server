@@ -1,22 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: huohsien
- * Date: 5/2/16
- * Time: 6:16 PM
- */
+
 header('Content-type:application/json;charset=utf-8');
 include_once("db.php");
-$user_id =$_REQUEST["user_id"];
+$token =$_REQUEST["token"];
 
-if (empty($user_id)) {
+if (empty($token)) {
     $output["error"]["code"] = '200';
     $output["error"]["message"] =  'Parameters are missing';
     echo json_encode($output,true);
     exit();
 }
 
-$sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.id = $user_id";
+$sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.token = '$token'";
 $result = db_q($sql);
 
 $directory = './books/';
