@@ -11,7 +11,7 @@ if (empty($token)) {
     exit();
 }
 
-$sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.token = '$token'";
+$sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.token = '$token' order by b.id desc";
 $result = db_q($sql);
 
 $directory = './books/';

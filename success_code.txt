@@ -1,2 +1,0 @@
-0 : OK
-100 : Inserted a reading status record

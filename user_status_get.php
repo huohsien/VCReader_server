@@ -48,6 +48,7 @@ if (empty($rs)) {
     echo json_encode($status,true);
     exit();
 }
+$status["token"] = $token;
 $status["book_name"] = $book_name;
 $status["chapter"] = $rs["current_reading_chapter"];
 $status["word"] = $rs["current_reading_word"];
