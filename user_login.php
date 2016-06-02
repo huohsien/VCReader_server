@@ -23,7 +23,6 @@ if (empty($rs)) {
 } else {
     $response["account_name"] = $rs["account_name"];
     $response["nick_name"] = $rs["nick_name"];
-    $response["phone_number"] = $rs["phone_number"];
     $response["token"] = $rs["token"];
     $response["timestamp"] = $rs["timestamp"];
     $response["signup_type"] = 'direct'; //$rs["signup_type"];

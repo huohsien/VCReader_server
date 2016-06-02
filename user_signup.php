@@ -7,7 +7,6 @@ include_once("db.php");
 $account_name = $_REQUEST["account_name"];
 $account_password = $_REQUEST["account_password"];
 $nic_kname = $_REQUEST["nick_name"];
-$token = $_REQUEST["token"];
 $timestamp = $_REQUEST["timestamp"];
 
 
@@ -22,7 +21,6 @@ if(empty($rs)) {
     // request to create a new user account
 
     // generate token for direct type of signing up
-    $timestamp = strval(time());
     $token = sha1($account_name.$account_password.$timestamp);
     $status["token"] = $token;
 
@@ -38,7 +36,6 @@ if(empty($rs)) {
     if ($verified == 0) {
 
         // generate token for direct type of signing up
-        $timestamp = strval(time());
         $token = sha1($account_name.$account_password.$timestamp);
         $status["token"] = $token;
 
