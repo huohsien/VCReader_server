@@ -18,6 +18,32 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
+// check if the email already exists
+
+$sql = "select * from User where email='$email'";
+$list_r = db_q($sql);
+$rs = get_data($list_r);
+
+if (!empty($rs)) {
+    $token_db = $rs["token"];
+    $verified = $rs["verified"];
+
+    if ($verified == 1) {
+
+        $status["error"]["code"] = '112';
+        $status["error"]["message"] = 'Email already exists';
+        echo json_encode($status,true);
+        exit();
+
+    } else if ($token != $token_db) {
+
+        $sql = "delete from User where email='$email'";
+        $list_r = db_q($sql);
+    }
+
+}
+
+
 $sql = "select * from User where token = '$token'";
 $list_r = db_q($sql);
 $rs = get_data($list_r);
@@ -28,6 +54,7 @@ if (empty($rs)) {
     exit();
 
 } else {
+
     $code = rand(100000,999999);
 
     $to      = $email; // Send email to our user

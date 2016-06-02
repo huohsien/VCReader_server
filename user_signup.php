@@ -17,7 +17,7 @@ $rs = get_data($list_r);
 $verified = $rs["verified"];
 
 if(empty($rs)) {
-
+    
     // request to create a new user account
 
     // generate token for direct type of signing up
@@ -28,8 +28,7 @@ if(empty($rs)) {
 
     $sql = "insert into User (account_name,account_password,nick_name,token,timestamp,signup_type) values ('$account_name','$account_password','$nick_name','$token','$timestamp','direct')";
     $list_r = db_q($sql);
-//    $user_id = mysql_insert_id();
-//    $status["user_id"] = $user_id;
+
 
 } else {
 
@@ -46,8 +45,7 @@ if(empty($rs)) {
         //create new account
         $sql = "insert into User (account_name,account_password,nick_name,token,timestamp,signup_type) values ('$account_name','$account_password','$nick_name','$token','$timestamp','direct')";
         $list_r = db_q($sql);
-//        $user_id = mysql_insert_id();
-//        $status["user_id"] = $user_id;
+
 
     } else {
 

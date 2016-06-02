@@ -11,4 +11,5 @@ error code:
 109 : Failed to verify email
 110 : Email verification code expired
 111 : Email not found
+112 : Email already exists
 200 : Parameters are missing
