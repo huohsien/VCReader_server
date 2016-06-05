@@ -1,6 +1,6 @@
 <?php
 
-$target_dir = "uploads/";
+$target_dir = "uploaded_logs/";
 
 $target_file = $target_dir .'log_'.basename($_FILES['upfile']['name']).'.txt';
 
