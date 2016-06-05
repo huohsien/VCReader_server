@@ -1,2 +1,3 @@
 0 : OK
 100 : Inserted a reading status record
+101 : Upload file successfully

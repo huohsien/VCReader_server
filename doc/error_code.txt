@@ -12,4 +12,6 @@ error code:
 110 : Email verification code expired
 111 : Email not found
 112 : Email already exists
-200 : Parameters are missing
+210 : Parameters are missing
+300 : Try to upload a log file that already exists
+301 : Try to upload a log file that is larger than the limit

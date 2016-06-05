@@ -5,7 +5,7 @@ include_once("db.php");
 $token =$_REQUEST["token"];
 
 if (empty($token)) {
-    $output["error"]["code"] = '200';
+    $output["error"]["code"] = '210';
     $output["error"]["message"] =  'Parameters are missing';
     echo json_encode($output,true);
     exit();
