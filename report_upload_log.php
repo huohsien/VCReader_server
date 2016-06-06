@@ -22,8 +22,8 @@ if ($_FILES['upfile']['size'] > 10000000) {
 }
 
 if (move_uploaded_file($_FILES['upfile']['tmp_name'], $target_file)) {
-    $status["success"]["code"] = "101";
-    $status["success"]["message"] = "Upload file successfully";
+    $status["success"]["code"] = "2";
+    $status["success"]["message"] = "Upload a file successfully";
     echo json_encode($status,true);
 } else {
     $status["error"]["code"] = "302";

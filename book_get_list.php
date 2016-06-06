@@ -5,14 +5,15 @@ include_once("db.php");
 $token =$_REQUEST["token"];
 
 if (empty($token)) {
-    $output["error"]["code"] = '210';
-    $output["error"]["message"] =  'Parameters are missing';
-    echo json_encode($output,true);
-    exit();
-}
 
-$sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.token = '$token' order by b.id desc";
-$result = db_q($sql);
+    $sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id order by b.id desc";
+    $result = db_q($sql);
+
+} else {
+    $sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id where u.token = '$token' order by b.id desc";
+    $result = db_q($sql);
+
+}
 
 $directory = './books/';
 $output = array();

@@ -1,3 +1,4 @@
 0 : OK
-100 : Inserted a reading status record
-101 : Upload file successfully
+1 : Inserted a reading status record successfully
+2 : Upload a file successfully
+3 : User add a book to his library successfully
