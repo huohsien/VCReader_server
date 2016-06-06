@@ -2,3 +2,4 @@
 1 : Inserted a reading status record successfully
 2 : Upload a file successfully
 3 : User add a book to his library successfully
+4 : User remove a book to his library successfully
