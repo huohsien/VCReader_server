@@ -35,7 +35,7 @@ if(empty($rs)) {
 }
 $user_id = $rs["id"];
 
-$sql = "delete from Ownership where book_id = '$book_id' and user_id = '#user_id'";
+$sql = "delete from Ownership where book_id = $book_id and user_id = $user_id";
 $list_r = db_q($sql);
 
 $status["success"]["code"] = '4';

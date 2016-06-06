@@ -6,7 +6,7 @@ $token =$_REQUEST["token"];
 
 if (empty($token)) {
 
-    $sql = "select b.book_name, b.content_filename, b.cover_image_filename, b.timestamp from Book as b join Ownership as o on o.book_id = b.id join User as u on u.id = o.user_id order by b.id desc";
+    $sql = "select book_name, content_filename, cover_image_filename, timestamp from Book  order by id desc";
     $result = db_q($sql);
 
 } else {
