@@ -35,6 +35,19 @@ if(empty($rs)) {
 }
 $user_id = $rs["id"];
 
+$sql = "select * from Ownership where user_id = $user_id and  book_id =$book_id";
+$list_r = db_q($sql);
+$rs = get_data($list_r);
+
+if(!empty($rs)) {
+
+    $status["error"]["code"] = '113';
+    $status["error"]["message"] = 'Try to add a new book that you already owned';
+
+    echo json_encode($status,true);
+    exit();
+}
+
 $sql = "insert into Ownership (user_id,book_id) values ($user_id,$book_id)";
 $list_r = db_q($sql);
 
