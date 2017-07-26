@@ -6,11 +6,11 @@ function db_q ($query)
 	$hostname="127.0.0.1";
 	$username="root";
 	$password="jj1216";
-	$db_link=mysql_pconnect("$hostname","$username","$password");
 	$db_name="VCReader";
-	$charset=mysql_db_query($db_name,"SET NAMES 'utf8'",$db_link);
-	$result=mysql_db_query($db_name,$query,$db_link);
-	$get_error=mysql_error($db_link);
+	$db_link=mysqli_connect("$hostname","$username","$password","$db_name");
+	$charset=mysqli_query($db_link,"SET NAMES 'utf8'");
+	$result=mysqli_query($db_link,$query);
+	$get_error=mysqli_error($db_link);
 	if($get_error)
 		echo  $get_error;
 	else
@@ -142,7 +142,7 @@ function logout()
 }
 function get_data($list_r)
 {
-	$result=mysql_fetch_array($list_r);
+	$result=mysqli_fetch_array($list_r);
 	return $result;
 }
 function fix_str($string)
