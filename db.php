@@ -158,12 +158,13 @@ function fix_url($string)
 }
 function r_size($list_r)
 {
-	$result=mysql_num_rows($list_r);
+	$result=mysqli_num_rows($list_r);
 	return $result;
-}
+} 
+/*
 function q_num()
 {
-	$result=mysql_affected_rows();
+	$result=mysqli_affected_rows();
 	return $result;
 }
 function last_id()
@@ -171,9 +172,10 @@ function last_id()
 	$result=mysql_insert_id();
 	return $result;
 }
+*/
 function col_size($list_r)
 {
-	$result=mysql_num_fields($list_r);
+	$result=mysqli_num_fields($list_r);
 	return $result;
 }
 function bk_string($string,$x,$y,$more)
@@ -202,7 +204,7 @@ function del_file($tb_name,$col_name,$sn,$s_path)
 		$list_q="select ".$col_name." from ".$tb_name." where sn=".$sn." ";
 		$list_r=db_q($list_q);
 		$rs=get_data($list_r);
-		$col_num=mysql_num_fields($list_r);
+		$col_num=mysqli_num_fields($list_r);
 		for($i=0;$i<$col_num;$i++)
 		{
 			//$col_name=mysql_field_name($list_r,$i);
