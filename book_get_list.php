@@ -19,7 +19,7 @@ $directory = './books/';
 $output = array();
 $idx = 0;
 
-while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
+while ($row = mysqli_fetch_array($result)) {
     if (file_exists($directory.$row[1]) && file_exists($directory.$row[2])) {
 
         $output[$idx]["book_name"] = $row[0];
