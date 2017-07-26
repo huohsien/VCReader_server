@@ -7,8 +7,8 @@ $email = $_REQUEST["email"];
 $token = $_REQUEST["token"];
 $timestamp = $_REQUEST["timestamp"];
 
-$token = mysql_escape_string($token);
-$email = mysql_escape_string($email);
+$token =escape($token);
+$email = escape($email);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     // Return Error - Invalid Email
@@ -69,5 +69,17 @@ if (empty($rs)) {
 $status["success"]["message"] = "OK";
 $status["success"]["code"] = '0';
 echo json_encode($status,true);
+function escape($value) {
+    $return = '';
+    for($i = 0; $i < strlen($value); ++$i) {
+        $char = $value[$i];
+        $ord = ord($char);
+        if($char !== "'" && $char !== "\"" && $char !== '\\' && $ord >= 32 && $ord <= 126)
+            $return .= $char;
+        else
+            $return .= '\\x' . dechex($ord);
+    }
+    return $return;
+}
 
 ?>
